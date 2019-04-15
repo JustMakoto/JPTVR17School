@@ -5,8 +5,11 @@
  */
 package jptvr17library;
 
+import providers.ReturnBookProvider;
+import providers.TakeBookProvider;
 import providers.ReaderProvider;
 import entity.Book;
+import entity.History;
 import entity.Reader;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ import providers.BookProvider;
 public class App {
     private List<Book> listBooks = new ArrayList<>();
     private List<Reader> listReaders = new ArrayList<>();
+    private List<History> listHistories = new ArrayList<>();
     
     private StoregeInFile storegeInFile;
     public App() {
@@ -35,7 +39,11 @@ public class App {
         } catch (Exception e) {
             System.out.println("Нет файла Readers.txt");
         }
-       
+        try {
+            listHistories = storegeInFile.loadHistoriesFromFile();
+        } catch (Exception e) {
+            System.out.println("Нет файла Readers.txt");
+        }
     }
     
     public void run() {
@@ -77,10 +85,17 @@ public class App {
                     }
                     break;
                 case 3:
-                    
+                    TakeBookProvider takeBookProvider = new TakeBookProvider();
+                    listHistories.add(takeBookProvider.takeBook(
+                            listBooks,
+                            listReaders
+                    ));
+                    storegeInFile.saveHistories(listHistories);
                     break;
                 case 4:
-                    
+                    ReturnBookProvider returnBookProvider = new ReturnBookProvider();
+                    listHistories = returnBookProvider.returnBook(listHistories);
+                    storegeInFile.saveHistories(listHistories);
                     break;
                 case 5:
                     System.out.println("Список книг: ");
@@ -94,6 +109,7 @@ public class App {
                         System.out.println(listReaders.get(i));
                     }
                     break;
+                
                 default:
                     System.out.println("Такое действие неподдерживается");
                     continue;

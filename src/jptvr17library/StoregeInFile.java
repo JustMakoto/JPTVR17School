@@ -6,6 +6,7 @@
 package jptvr17library;
 
 import entity.Book;
+import entity.History;
 import entity.Reader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -93,6 +94,45 @@ public class StoregeInFile {
             fos = new FileOutputStream("Readers.txt");
             oos = new ObjectOutputStream(fos);
             oos.writeObject(listReaders);
+            oos.flush();
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(StoregeInFile.class.getName())
+               .log(Level.SEVERE, "Нет такого файла", ex);
+        } catch (IOException ex) {
+            Logger.getLogger(StoregeInFile.class.getName())
+               .log(Level.SEVERE, "Не могу записать", ex);
+        }
+    }
+
+    List<History> loadHistoriesFromFile() {
+        List<History> histories = new ArrayList<>();
+            FileInputStream fis = null;
+            ObjectInputStream oin = null;
+         try {   
+            fis = new FileInputStream("Histories.txt");
+            oin = new ObjectInputStream(fis);
+            histories = (List<History>) oin.readObject();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(StoregeInFile.class.getName())
+                .log(Level.SEVERE, "Нет такого файла", ex);
+        } catch (IOException ex) {
+            Logger.getLogger(StoregeInFile.class.getName())
+                .log(Level.SEVERE, "Не могу читать из файла", ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StoregeInFile.class.getName())
+                .log(Level.SEVERE, "Нет такого класса", ex);
+        }
+        return histories;
+    }
+
+    void saveHistories(List<History> listHistories) {
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+        try {
+            fos = new FileOutputStream("Histories.txt");
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(listHistories);
             oos.flush();
             oos.close();
         } catch (FileNotFoundException ex) {
