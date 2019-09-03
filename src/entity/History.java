@@ -8,16 +8,30 @@ package entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Melnikov
  */
+@Entity
 public class History implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne
     private Reader reader;
+    @OneToOne
     private Book book;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date takeBook;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date returnBook;
 
     public History() {

@@ -11,6 +11,7 @@ import providers.ReaderProvider;
 import entity.Book;
 import entity.History;
 import entity.Reader;
+import interfaces.Saveble;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,22 +26,23 @@ public class App {
     private List<Reader> listReaders = new ArrayList<>();
     private List<History> listHistories = new ArrayList<>();
     
-    private StoregeInFile storegeInFile;
+    private Saveble savable;
     public App() {
-       storegeInFile = new StoregeInFile();
+       savable = new StorageInBase();
+       //savable = new StorageInFile();
         try {
-            listBooks = storegeInFile.loadBookFromFile();
+            listBooks = savable.loadBookFromStorage();
         } catch (Exception e) {
             System.out.println("Нет файла Books.txt");
         }
        
         try {
-            listReaders = storegeInFile.loadReaderFromFile();
+            listReaders = savable.loadReaderFromStorage();
         } catch (Exception e) {
             System.out.println("Нет файла Readers.txt");
         }
         try {
-            listHistories = storegeInFile.loadHistoriesFromFile();
+            listHistories = savable.loadHistoriesFromStorage();
         } catch (Exception e) {
             System.out.println("Нет файла Readers.txt");
         }
@@ -65,7 +67,7 @@ public class App {
                 case 1:
                     BookProvider bookProvider = new BookProvider();
                     listBooks.add(bookProvider.createBook());
-                    storegeInFile.saveBooks(listBooks);
+                    savable.saveBooks(listBooks);
                     for(int i=0; i < listBooks.size();i++){
                        System.out.println(
                             "Список книг: " 
@@ -76,7 +78,7 @@ public class App {
                 case 2:
                     ReaderProvider readerProvider = new ReaderProvider();
                     listReaders.add(readerProvider.createReader());
-                    storegeInFile.saveReaders(listReaders);
+                    savable.saveReaders(listReaders);
                     for(int i=0; i < listReaders.size();i++){
                        System.out.println(
                             "Список читателей: " 
@@ -90,12 +92,12 @@ public class App {
                             listBooks,
                             listReaders
                     ));
-                    storegeInFile.saveHistories(listHistories);
+                    savable.saveHistories(listHistories);
                     break;
                 case 4:
                     ReturnBookProvider returnBookProvider = new ReturnBookProvider();
                     listHistories = returnBookProvider.returnBook(listHistories);
-                    storegeInFile.saveHistories(listHistories);
+                    savable.saveHistories(listHistories);
                     break;
                 case 5:
                     System.out.println("Список книг: ");

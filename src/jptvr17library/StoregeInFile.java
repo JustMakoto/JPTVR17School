@@ -8,6 +8,7 @@ package jptvr17library;
 import entity.Book;
 import entity.History;
 import entity.Reader;
+import interfaces.Saveble;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,9 +24,10 @@ import java.util.logging.Logger;
  *
  * @author Melnikov
  */
-public class StoregeInFile {
+public class StoregeInFile implements Saveble{
 
-    void saveBooks(List<Book> listBooks) {
+    @Override
+    public void saveBooks(List<Book> listBooks) {
         
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
@@ -45,7 +47,8 @@ public class StoregeInFile {
        
     }
 
-    List<Book> loadBookFromFile() {
+    @Override
+    public List<Book> loadBookFromStorage() {
             List<Book> books = new ArrayList<>();
             FileInputStream fis = null;
             ObjectInputStream oin = null;
@@ -66,7 +69,8 @@ public class StoregeInFile {
         return books;
     }
 
-    List<Reader> loadReaderFromFile() {
+    @Override
+    public List<Reader> loadReaderFromStorage() {
         List<Reader> readers = new ArrayList<>();
             FileInputStream fis = null;
             ObjectInputStream oin = null;
@@ -87,7 +91,8 @@ public class StoregeInFile {
         return readers;
     }
 
-    void saveReaders(List<Reader> listReaders) {
+    @Override
+    public void saveReaders(List<Reader> listReaders) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
@@ -105,7 +110,8 @@ public class StoregeInFile {
         }
     }
 
-    List<History> loadHistoriesFromFile() {
+    @Override
+    public List<History> loadHistoriesFromStorage() {
         List<History> histories = new ArrayList<>();
             FileInputStream fis = null;
             ObjectInputStream oin = null;
@@ -126,7 +132,8 @@ public class StoregeInFile {
         return histories;
     }
 
-    void saveHistories(List<History> listHistories) {
+    @Override
+    public void saveHistories(List<History> listHistories) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
