@@ -1,49 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author Melnikov
- */
+
 @Entity
-public class Book implements Serializable{
+public class Subject implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String author;
-    private String isbn;
-    private int publishedYear;
+    private String lang;
+    private int hours;
 
-    public Book() {
+    public Subject() {
     }
 
-    public Book(Long id, String name, String author, String isbn, int publishedYear) {
+    public Subject(Long id, String name, String author, String lang, int hours) {
         this.id = id;
         this.name = name;
         this.author = author;
-        this.isbn = isbn;
-        this.publishedYear = publishedYear;
+        this.lang = lang;
+        this.hours = hours;
     }
 
-    public int getPublishedYear() {
-        return publishedYear;
+    public int getHours() {
+        return hours;
     }
 
-    public void setPublishedYear(int publishedYear) {
-        this.publishedYear = publishedYear;
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 
     public Long getId() {
@@ -70,12 +61,12 @@ public class Book implements Serializable{
         this.author = author;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getLang() {
+        return lang;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setLang(String lang) {
+        this.lang = lang;
     }
 
     @Override
@@ -84,8 +75,8 @@ public class Book implements Serializable{
         hash = 17 * hash + Objects.hashCode(this.id);
         hash = 17 * hash + Objects.hashCode(this.name);
         hash = 17 * hash + Objects.hashCode(this.author);
-        hash = 17 * hash + Objects.hashCode(this.isbn);
-        hash = 17 * hash + this.publishedYear;
+        hash = 17 * hash + Objects.hashCode(this.lang);
+        hash = 17 * hash + this.hours;
         return hash;
     }
 
@@ -100,8 +91,8 @@ public class Book implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Book other = (Book) obj;
-        if (this.publishedYear != other.publishedYear) {
+        final Subject other = (Subject) obj;
+        if (this.hours != other.hours) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -110,7 +101,7 @@ public class Book implements Serializable{
         if (!Objects.equals(this.author, other.author)) {
             return false;
         }
-        if (!Objects.equals(this.isbn, other.isbn)) {
+        if (!Objects.equals(this.lang, other.lang)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -121,12 +112,10 @@ public class Book implements Serializable{
 
     @Override
     public String toString() {
-        return "Book{" + "id=" + id 
-                + ", name=" + name 
-                + ", author=" + author 
-                + ", isbn=" + isbn 
-                + ", publishedYear=" + publishedYear 
-                + '}';
+        return  name 
+                +" "+ author 
+                +" "+ lang 
+                +" "+ hours +" Академ. Часов" + "\n";
     }
     
     

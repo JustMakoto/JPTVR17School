@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
@@ -12,12 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author Melnikov
- */
+
 @Entity
-public class Reader implements Serializable{
+public class Student implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,10 +17,10 @@ public class Reader implements Serializable{
     private String surname;
     private String phone;
 
-    public Reader() {
+    public Student() {
     }
 
-    public Reader(Long id, String name, String surname, String phone) {
+    public Student(Long id, String name, String surname, String phone) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -88,7 +80,7 @@ public class Reader implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Reader other = (Reader) obj;
+        final Student other = (Student) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -106,11 +98,9 @@ public class Reader implements Serializable{
 
     @Override
     public String toString() {
-        return "Reader{" + "id=" + id
-                + ", name=" + name
-                + ", surname=" + surname 
-                + ", phone=" + phone 
-                + '}';
+        return  name
+                +" "+ surname 
+                +" "+ phone + "\n" ;
     }
     
     
