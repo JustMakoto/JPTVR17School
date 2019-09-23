@@ -13,8 +13,8 @@ import interfaces.Savable;
 
 
 public class StorageInBase implements Savable{
-    private EntityManager em;
-    private EntityTransaction tx;
+    public EntityManager em;
+    public EntityTransaction tx;
 
     public StorageInBase() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPTVR17SchoolPU");
@@ -88,7 +88,7 @@ public class StorageInBase implements Savable{
     
     public List<Student> loadStudentFromStorage() {
         this.tx.begin();
-            List<Student> listStudents = em.createQuery("SELECT s FROM Student s").getResultList();
+            List<Student> listStudents = em.createQuery("SELECT o FROM Student o").getResultList();
         this.tx.commit();
         return listStudents;
     }

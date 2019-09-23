@@ -14,17 +14,17 @@ public class Subject implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String author;
+    private String teacher;
     private String lang;
     private int hours;
 
     public Subject() {
     }
 
-    public Subject(Long id, String name, String author, String lang, int hours) {
+    public Subject(Long id, String name, String teacher, String lang, int hours) {
         this.id = id;
         this.name = name;
-        this.author = author;
+        this.teacher = teacher;
         this.lang = lang;
         this.hours = hours;
     }
@@ -54,11 +54,11 @@ public class Subject implements Serializable{
     }
 
     public String getAuthor() {
-        return author;
+        return teacher;
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        this.teacher = author;
     }
 
     public String getLang() {
@@ -74,7 +74,7 @@ public class Subject implements Serializable{
         int hash = 5;
         hash = 17 * hash + Objects.hashCode(this.id);
         hash = 17 * hash + Objects.hashCode(this.name);
-        hash = 17 * hash + Objects.hashCode(this.author);
+        hash = 17 * hash + Objects.hashCode(this.teacher);
         hash = 17 * hash + Objects.hashCode(this.lang);
         hash = 17 * hash + this.hours;
         return hash;
@@ -98,7 +98,7 @@ public class Subject implements Serializable{
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.author, other.author)) {
+        if (!Objects.equals(this.teacher, other.teacher)) {
             return false;
         }
         if (!Objects.equals(this.lang, other.lang)) {
@@ -113,7 +113,7 @@ public class Subject implements Serializable{
     @Override
     public String toString() {
         return  name 
-                +" "+ author 
+                +" "+ teacher 
                 +" "+ lang 
                 +" "+ hours +" Академ. Часов" + "\n";
     }

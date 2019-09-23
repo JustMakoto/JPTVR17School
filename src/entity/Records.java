@@ -120,7 +120,7 @@ public class Records implements Serializable{
 
     @Override
     public String toString() {
-        return id +" "+ student +" "+ subject +" "+ grade +" "+ gradeDate + "\n";
+        return student +" "+ subject +" "+ grade +" "+ gradeDate + "\n";
     }
 
 
